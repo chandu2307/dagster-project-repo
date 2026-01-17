@@ -24,49 +24,57 @@ Repository for writing dagster codes
 
 4) Configure dagster to use postgres
     dagster.yaml
-    ```
-      storage:
-         postgres:
-             postgres_db:
-                 username: dagster
-                 password: dagster
-                 hostname: localhost
-                 db_name: dagster_metadata
-                 port: 5432
+   ```
+     run_storage:
+       module: dagster_postgres.run_storage
+       class: PostgresRunStorage
+     config:
+       postgres_db:
+       username:
+         env: DAGSTER_DB_USER
+       password:
+         env: DAGSTER_DB_PASSWORD
+       hostname:
+         env: DAGSTER_DB_HOST
+       db_name:
+         env: DAGSTER_DB_NAME
+       port:
+         env: DAGSTER_DB_PORT
 
-      run_storage:
-         module: dagster_postgres.run_storage
-         class: PostgresRunStorage
-         config:
-           postgres_db:
-           username: dagster
-           password: dagster
-           hostname: localhost
-           db_name: dagster_metadata
-           port: 5432
+      event_log_storage:
+       module: dagster_postgres.event_log
+       class: PostgresEventLogStorage
+       config:
+        postgres_db:
+        username:
+         env: DAGSTER_DB_USER
+        password:
+         env: DAGSTER_DB_PASSWORD
+        hostname:
+         env: DAGSTER_DB_HOST
+        db_name:
+          env: DAGSTER_DB_NAME
+        port:
+         env: DAGSTER_DB_PORT
 
-       event_log_storage:
-           module: dagster_postgres.event_log
-           class: PostgresEventLogStorage
-           config:
-               postgres_db:
-               username: dagster
-               password: dagster
-               hostname: localhost
-               db_name: dagster_metadata
-               port: 5432
-
-       schedule_storage:
-           module: dagster_postgres.schedule_storage
-           class: PostgresScheduleStorage
-           config:
-               postgres_db:
-               username: dagster
-               password: dagster
-               hostname: localhost
-               db_name: dagster_metadata
-               port: 5432
-    ```
+     schedule_storage:
+      module: dagster_postgres.schedule_storage
+      class: PostgresScheduleStorage
+      config:
+       postgres_db:
+        username:
+         env: DAGSTER_DB_USER
+        password:
+         env: DAGSTER_DB_PASSWORD
+        hostname:
+         env: DAGSTER_DB_HOST
+        db_name:
+         env: DAGSTER_DB_NAME
+        port:
+         env: DAGSTER_DB_PORT
+      ```
+      
+          
 
 5) run dagster
     command : 
